@@ -21,7 +21,7 @@ Then, you can run the following command to preprocess the datasets:
 
 ### On Python dataset
 
-you can download the victim model into `code/saved_models/gcjpy/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing).
+you can download the victim model into `code/saved_models/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing).
 
 ```shell
 pip install gdown
