@@ -2,16 +2,15 @@
 
 ## Dataset
 
-First, you need to download the dataset from [link](https://drive.google.com/file/d/1t0lmgVHAVpB1GxVqMXpXdU8ArJEQQfqe/view?usp=sharing). Then, you need to decompress the `.zip` file to the `dataset/data_folder`. For example:
+First, you need to download the dataset from [link](https://drive.google.com/file/d/1t0lmgVHAVpB1GxVqMXpXdU8ArJEQQfqe/view?usp=sharing). Then, you need to decompress the `.zip` file to the `dataset/`. For example:
 
 ```
 pip install gdown
 gdown https://drive.google.com/uc?id=1t0lmgVHAVpB1GxVqMXpXdU8ArJEQQfqe
 unzip gcjpy.zip
+mkdir dataset
 cd dataset
-mkdir data_folder
-cd data_folder
-mv ../../gcjpy ./
+mv ../gcjpy ./
 ```
 
 Then, you can run the following command to preprocess the datasets:
@@ -22,13 +21,13 @@ Then, you can run the following command to preprocess the datasets:
 
 ### On Python dataset
 
-If you don't want to be bothered by fine-tuning models, you can download the victim model into `code/saved_models/gcjpy/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing).
+you can download the victim model into `code/saved_models/gcjpy/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing).
 
 ```shell
 pip install gdown
-mkdir code/saved_models/gcjpy/checkpoint-best-f1
+mkdir saved_models/checkpoint-best-f1
 gdown https://drive.google.com/uc?id=14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w
-mv model.bin code/saved_models/gcjpy/checkpoint-best-f1/
+mv model.bin saved_models/checkpoint-best-f1/
 ```
 
 
