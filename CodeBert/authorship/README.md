@@ -41,7 +41,7 @@ python rnns_attacker.py \
     --model_name_or_path=microsoft/codebert-base \
     --tokenizer_name=roberta-base \
     --base_model=microsoft/codebert-base-mlm \
-    --tgt_model=./saved_models/checkpoint-best-acc/model.bin \
+    --tgt_model=./saved_models/checkpoint-best-f1/model.bin \
     --rnns_type=RNNS-Smooth \
     --max_distance=0.15 \
     --max_length_diff=3 \
@@ -69,7 +69,7 @@ python rnns_attacker.py \
     --model_name_or_path=microsoft/codebert-base \
     --tokenizer_name=roberta-base \
     --base_model=microsoft/codebert-base-mlm \
-    --tgt_model=./saved_models/checkpoint-best-acc/model.bin \
+    --tgt_model=./saved_models/checkpoint-best-f1/model.bin \
     --rnns_type=RNNS-Raw \
     --max_distance=0.15 \
     --max_length_diff=3 \
@@ -96,7 +96,7 @@ python rnns_attacker.py \
     --model_name_or_path=microsoft/codebert-base \
     --tokenizer_name=roberta-base \
     --base_model=microsoft/codebert-base-mlm \
-    --tgt_model=./saved_models/checkpoint-best-acc/model.bin \
+    --tgt_model=./saved_models/checkpoint-best-f1/model.bin \
     --rnns_type=RNNS-Delta \
     --max_distance=0.15 \
     --max_length_diff=3 \
