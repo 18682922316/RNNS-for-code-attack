@@ -51,9 +51,9 @@ python rnns_attacker.py \
     --number_labels 66 \
     --csv_store_path ./rnns_attacker.csv \
     --language_type python \
-    --train_data_file=../dataset/data_folder/processed_gcjpy/train.txt \
-    --valid_data_file=../dataset/data_folder/processed_gcjpy/valid.txt \
-    --test_data_file=../dataset/data_folder/processed_gcjpy/valid.txt \
+    --train_data_file=../dataset/train.txt \
+    --valid_data_file=../dataset/valid.txt \
+    --test_data_file=../dataset/valid.txt \
     --block_size 512 \
     --eval_batch_size 32 \
     --seed 123456 2>&1| tee rnns_attacker.log
@@ -79,9 +79,9 @@ python rnns_attacker.py \
     --number_labels 66 \
     --csv_store_path ./rnns_attacker.csv \
     --language_type python \
-    --train_data_file=../dataset/data_folder/processed_gcjpy/train.txt \
-    --valid_data_file=../dataset/data_folder/processed_gcjpy/valid.txt \
-    --test_data_file=../dataset/data_folder/processed_gcjpy/valid.txt \
+    --train_data_file=../dataset/train.txt \
+    --valid_data_file=../dataset/valid.txt \
+    --test_data_file=../dataset/valid.txt \
     --block_size 512 \
     --eval_batch_size 32 \
     --seed 123456 2>&1| tee rnns_attacker.log
@@ -106,9 +106,9 @@ python rnns_attacker.py \
     --number_labels 66 \
     --csv_store_path ./rnns_attacker.csv \
     --language_type python \
-    --train_data_file=../dataset/data_folder/processed_gcjpy/train.txt \
-    --valid_data_file=../dataset/data_folder/processed_gcjpy/valid.txt \
-    --test_data_file=../dataset/data_folder/processed_gcjpy/valid.txt \
+    --train_data_file=../dataset/train.txt \
+    --valid_data_file=../dataset/valid.txt \
+    --test_data_file=../dataset/valid.txt \
     --block_size 512 \
     --eval_batch_size 32 \
     --seed 123456 2>&1| tee rnns_attacker.log
