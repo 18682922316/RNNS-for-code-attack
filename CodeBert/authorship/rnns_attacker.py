@@ -99,22 +99,20 @@ class RnnsAttacker():
         source_ids += [tokenizer.pad_token_id] * padding_length
         return InputFeatures(source_tokens, source_ids, 0, label)
     
-    def _get_var_importance_score_by_variance(self, args, example, code, words_list: list, sub_words: list, variable_names: list,
+    def _get_var_importance_score_by_uncertainty(self, args, example, code, words_list: list, sub_words: list, variable_names: list,
                                              tgt_model,
                                              tokenizer, batch_size=16, max_length=512,
                                              model_type='classification'):
-        '''Compute the importance score of each variable'''
-        # label: example[1] tensor(1)
-        # 1. 过滤掉所有的keywords.
+
+
         positions = get_identifier_posistions_from_code(words_list, variable_names)
-        # 需要注意大小写.
+
         if len(positions) == 0:
-            ## 没有提取出可以mutate的position
             return None
 
         new_example = []
 
-        # 2. 得到Masked_tokens
+
         masked_token_list, masked_var_list = get_replaced_var_code_with_meaningless_char(words_list, positions)
         # replace_token_positions 表示着，哪一个位置的token被替换了.
 
@@ -123,7 +121,7 @@ class RnnsAttacker():
             new_feature = self._convert_code_to_features(new_code, tokenizer, example[1].item(), args)
             new_example.append(new_feature)
         new_dataset = CodeDataset(new_example)
-        # 3. 将他们转化成features
+
         logits, preds = tgt_model.get_results(new_dataset, args.eval_batch_size)
         orig_probs = logits[0]
         orig_label = preds[0]
@@ -176,24 +174,21 @@ class RnnsAttacker():
         processed_code = " ".join(code_tokens)
 
         words, sub_words, keys = _tokenize(processed_code, self.tokenizer_mlm)
-        # 这里经过了小写处理..
 
         substituions = {}
 
         if not orig_label == true_label:
-            # 说明原来就是错的
             is_success = -4
             return code, prog_length, adv_code, true_label, orig_label, temp_label, is_success, variable_names, None, None, None, None
 
         if len(variable_names) == 0:
-            # 没有提取到identifier，直接退出
             is_success = -3
             return code, prog_length, adv_code, true_label, orig_label, temp_label, is_success, variable_names, None, None, None, None
 
         sub_words = [self.tokenizer_tgt.cls_token] + sub_words[:self.args.block_size - 2] + [
             self.tokenizer_tgt.sep_token]
 
-        names_to_importance_score, names_positions_dict = self._get_var_importance_score_by_variance(self.args, example,
+        names_to_importance_score, names_positions_dict = self._get_var_importance_score_by_uncertainty(self.args, example,
                                                                                                processed_code,
                                                                                                words,
                                                                                                sub_words,
@@ -210,10 +205,10 @@ class RnnsAttacker():
         ranking_order_variance = 0
         var_size = len(names_to_importance_score.keys())
         
-        # 根据importance_score进行排序
+
         final_words = copy.deepcopy(words)
         final_code = copy.deepcopy(code)
-        nb_changed_var = 0  # 表示被修改的variable数量
+        nb_changed_var = 0  
         nb_changed_pos = 0
         is_success = -1
         replaced_words = {}
@@ -230,7 +225,7 @@ class RnnsAttacker():
             variable_embs = [ self.variable_emb[index] for index in variable_index_list]
             valid_variable_names = [ self.variable_name[index] for index in variable_index_list]
             
-            #random
+
             index_list = [i for i in range(0, len(valid_variable_names))]
             random.shuffle(index_list)
             inds_1 = index_list[:self.args.substitutes_size]
@@ -239,7 +234,7 @@ class RnnsAttacker():
             substituions[tgt_word] =  [valid_variable_names[ind] for ind in inds_2]
 
  
-            # 得到了所有位置的substitue，并使用set来去重
+
             candidate = None
             new_substitutes = []
             for sub in all_substitues:
@@ -251,8 +246,6 @@ class RnnsAttacker():
             momentum = None
             track = []
             while True:
-                # 依次记录了被加进来的substitue
-                # 即，每个temp_replace对应的substitue.
                 substitute_list = []
                 replace_examples = []
                 most_gap = 0.0
@@ -262,11 +255,11 @@ class RnnsAttacker():
                     new_feature = self._convert_code_to_features(temp_code, self.tokenizer_tgt, example[1].item(), self.args)
                     replace_examples.append(new_feature)
                 if len(replace_examples) == 0:
-                    # 并没有生成新的mutants，直接跳去下一个token
+
                     break
 
                 new_dataset = CodeDataset(replace_examples)
-                # 3. 将他们转化成features
+    
                 logits, preds = self.model_tgt.get_results(new_dataset, self.args.eval_batch_size)
                 assert (len(logits) == len(substitute_list))
                 used_candidate.extend(all_substitues)
@@ -275,7 +268,6 @@ class RnnsAttacker():
                 for index, temp_prob in enumerate(logits):
                     temp_label = preds[index]
                     if temp_label != orig_label:
-                        # 如果label改变了，说明这个mutant攻击成功
                         is_success = 1
                         nb_changed_var += 1
                         nb_changed_pos += len(names_positions_dict[tgt_word])
@@ -311,26 +303,26 @@ class RnnsAttacker():
                     candidate_index = valid_variable_names.index(candidate)
                     best_candidate_index = valid_variable_names.index(best_candidate)
 
-                    if self.args.rnns_type == "RNNS-Raw":
-                        prob_delt_emb = 0.0
-                    else:
-                        prob_delt_emb = variable_embs[candidate_index] - variable_embs[best_candidate_index]
                         
+                    prob_delt_emb = variable_embs[candidate_index] - variable_embs[best_candidate_index]
                     if momentum is None:
-                        momentum = prob_delt_emb        
-                    else:
-                        momentum = (1 - self.args.a) * momentum + self.args.a * prob_delt_emb
-                        
+                        momentum = prob_delt_emb   
+                    momentum = (1 - self.args.a) * momentum + self.args.a * prob_delt_emb
+                    
                     if self.args.rnns_type == "RNNS-Delta":
                         virtual_emb = variable_embs[candidate_index] + prob_delt_emb
-                    else:
+                    elif self.args.rnns_type == "RNNS-Smooth":
                         virtual_emb = variable_embs[candidate_index] + momentum
-                        
+                    elif self.args.rnns_type == "RNNS-Raw":
+                        virtual_emb = variable_embs[candidate_index]
+                    else:
+                        pass
+                    
                     similarity = cosine_similarity(np.array(variable_embs),
                                                    np.array([virtual_emb]))
 
 
-                    inds = heapq.nlargest(1000, range(len(similarity)), similarity.__getitem__)
+                    inds = heapq.nlargest(len(similarity), range(len(similarity)), similarity.__getitem__)
                     new_substitutes.clear()
                     if len(replaced_words) > 0:
                         used_candidate.extend(list(replaced_words.values()))
@@ -543,6 +535,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
