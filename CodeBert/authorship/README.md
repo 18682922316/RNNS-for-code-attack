@@ -2,23 +2,26 @@
 
 ## Dataset
 
-First, you need to download the dataset from [link](https://drive.google.com/file/d/1t0lmgVHAVpB1GxVqMXpXdU8ArJEQQfqe/view?usp=sharing). Then, you need to decompress the `.zip` file to the `dataset/`. For example:
+First, you need to download the train.txt and valid.txt from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/CodeXGLUE/Authorship-Attribution/dataset/data_folder/processed_gcjpy/)
+Then, you need create the dataset directory and move train.txt,valid.txt to this directory.
 
+## Code Parser
+First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser)
+Then, you need move python_parser directory to current directory.
+Last, you python_parser/parser_folder
+
+
+## Build `tree-sitter`
+
+We use `tree-sitter` to parse code snippets and extract variable names. 
+First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser)
+Then, you need move python_parser directory to current directory.
+Last, You need to go to `./python_parser/parser_folder` folder and build tree-sitter using the following commands: 
 ```
-pip install gdown
-gdown https://drive.google.com/uc?id=1t0lmgVHAVpB1GxVqMXpXdU8ArJEQQfqe
-unzip gcjpy.zip
-mkdir dataset
-cd dataset
-mv ../gcjpy ./
+bash build.sh
 ```
-
-Then, you can run the following command to preprocess the datasets:
-
-
 
 ## Attack
-
 ### On Python dataset
 
 you can download the victim model into `saved_models/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing).
