@@ -1,5 +1,4 @@
-# Copyright (c) Microsoft Corporation. 
-# Licensed under the MIT license.
+
 import torch
 import torch.nn as nn
 import torch
@@ -54,9 +53,7 @@ class Model(nn.Module):
             return prob
       
     def get_results(self, dataset, batch_size):
-        '''
-        给定example和tgt model，返回预测的label和probability
-        '''
+ 
         self.query += len(dataset)
         eval_sampler = SequentialSampler(dataset)
         eval_dataloader = DataLoader(dataset, sampler=eval_sampler, batch_size=batch_size,num_workers=4,pin_memory=False)
@@ -73,7 +70,7 @@ class Model(nn.Module):
             label=batch[1].to("cuda") 
             with torch.no_grad():
                 lm_loss,logit = self.forward(inputs,label)
-                # 调用这个模型. 重写了反前向传播模型.
+
                 eval_loss += lm_loss.mean().item()
                 logits.append(logit.cpu().numpy())
                 labels.append(label.cpu().numpy())
