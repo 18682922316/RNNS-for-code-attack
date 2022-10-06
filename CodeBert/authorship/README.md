@@ -2,21 +2,22 @@
 
 ## Dataset
 
-First, you need to download the train.txt and valid.txt from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/CodeXGLUE/Authorship-Attribution/dataset/data_folder/processed_gcjpy/)
+First, you need to download the train.txt and valid.txt from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/CodeXGLUE/Authorship-Attribution/dataset/data_folder/processed_gcjpy/).
+
 Then, you need create the dataset directory and move train.txt,valid.txt to this directory.
 
-## Code Parser
-First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser)
-Then, you need move python_parser directory to current directory.
-Last, you python_parser/parser_folder
 
 
 ## Build `tree-sitter`
 
 We use `tree-sitter` to parse code snippets and extract variable names. 
-First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser)
+
+First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser).
+
 Then, you need move python_parser directory to current directory.
+
 Last, You need to go to `./python_parser/parser_folder` folder and build tree-sitter using the following commands: 
+
 ```
 bash build.sh
 ```
