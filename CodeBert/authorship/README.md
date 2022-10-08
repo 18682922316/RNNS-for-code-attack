@@ -12,7 +12,7 @@ Then, you need create the dataset directory and move train.txt,valid.txt to this
 
 We use `tree-sitter` to parse code snippets and extract variable names. 
 
-First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser). .(This link is our reference work and will not reveal our identity).
+First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser) .(This link is our reference work and will not reveal our identity).
 
 Then, you need move python_parser directory to current directory.
 
