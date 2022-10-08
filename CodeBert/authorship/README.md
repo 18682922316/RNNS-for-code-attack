@@ -2,7 +2,7 @@
 
 ## Dataset
 
-First, you need to download the train.txt and valid.txt from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/CodeXGLUE/Authorship-Attribution/dataset/data_folder/processed_gcjpy/)(This link is for reference and will not reveal authors’ identity).
+First, you need to download the train.txt and valid.txt from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/CodeXGLUE/Authorship-Attribution/dataset/data_folder/processed_gcjpy/).(This link is our reference work and will not reveal authors’ identity).
 
 Then, you need create the dataset directory and move train.txt,valid.txt to this directory.
 
@@ -12,7 +12,7 @@ Then, you need create the dataset directory and move train.txt,valid.txt to this
 
 We use `tree-sitter` to parse code snippets and extract variable names. 
 
-First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser)(This link is for reference and will not reveal authors’ identity).
+First, you need to download the code parser from [link](https://github.com/soarsmu/attack-pretrain-models-of-code/tree/main/python_parser). .(This link is our reference work and will not reveal authors’ identity).
 
 Then, you need move python_parser directory to current directory.
 
@@ -23,9 +23,8 @@ bash build.sh
 ```
 
 ## Attack
-### On Python dataset
 
-you can download the victim model into `saved_models/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing)(This link is for reference and will not reveal authors’ identity).
+you can download the victim model into `saved_models/checkpoint-best-f1` by [this link](https://drive.google.com/file/d/14dOsW-_C0D1IINP2J4l2VqB-IAlGB15w/view?usp=sharing). (This link is our reference work and will not reveal authors’ identity).
 
 ```shell
 pip install gdown
