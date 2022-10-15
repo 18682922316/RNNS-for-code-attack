@@ -66,7 +66,7 @@ python rnns_attacker.py \
     --iters=6 \
     --a=0.2 \
     --number_labels 66 \
-    --csv_store_path rnns_attacker.csv \
+    --csv_store_path rnns_smooth_attacker.csv \
     --language_type python \
     --train_data_file=dataset/train.txt \
     --valid_data_file=dataset/valid.txt \
@@ -94,7 +94,7 @@ python rnns_attacker.py \
     --iters=6 \
     --a=0.2 \
     --number_labels 66 \
-    --csv_store_path rnns_attacker.csv \
+    --csv_store_path rnns_raw_attacker.csv \
     --language_type python \
     --train_data_file=dataset/train.txt \
     --valid_data_file=dataset/valid.txt \
@@ -121,7 +121,7 @@ python rnns_attacker.py \
     --iters=6 \
     --a=0.2 \
     --number_labels 66 \
-    --csv_store_path rnns_attacker.csv \
+    --csv_store_path rnns_delta_attacker.csv \
     --language_type python \
     --train_data_file=dataset/train.txt \
     --valid_data_file=dataset/valid.txt \
@@ -149,4 +149,23 @@ python mhm_attacker.py \
         --csv_store_path mhm_attacker.csv  \
         --number_labels 66  \
         --seed 123456  2>&1| tee mhm_attacker.log
+```
+## statistical analysis
+#### analysis mhm result
+```shell
+python statistical_analysis.py --csv_store_path  mhm_attacker.csv
+```
+#### analysis RNN-Smooth result
+```shell
+python statistical_analysis.py --csv_store_path  rnns_smooth_attacker.csv
+```
+
+#### analysis RNN-raw result
+```shell
+python statistical_analysis.py --csv_store_path  rnns_raw_attacker.csv
+```
+
+#### analysis RNN-Delta result
+```shell
+python statistical_analysis.py --csv_store_path  rnns_delta_attacker.csv
 ```
