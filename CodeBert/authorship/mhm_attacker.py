@@ -272,9 +272,6 @@ def main():
     parser.add_argument("--cache_dir", default="", type=str,
                         help="Optional directory to store the pre-trained models downloaded from s3 (instread of the default one)")
 
-    parser.add_argument("--index", nargs='+',
-                        help="Optional input sequence length after tokenization.")
-    
     
     parser.add_argument("--tgt_model", default="saved_models/checkpoint-best-f1/model.bin", type=str,
                         help="")
@@ -362,9 +359,7 @@ def main():
     total_cnt = 0
     query_times = 0
     all_start_time = time.time()
-    for index, example in enumerate(test_dataset):
-        if index < int(args.index[0]) or index >= int(args.index[1]):
-            continue         
+    for index, example in enumerate(test_dataset):       
         code = source_codes[index]
 
         orig_prob, orig_label = model.get_results([example], args.eval_batch_size)
