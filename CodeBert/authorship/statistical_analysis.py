@@ -8,7 +8,7 @@ from transformers import (RobertaForMaskedLM, RobertaConfig, RobertaForSequenceC
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--input", default="", type=str,
+parser.add_argument("--csv_store_path", default="", type=str,
                     help="")
 
 args = parser.parse_args()
@@ -56,7 +56,7 @@ if __name__=="__main__":
     sim_list = []
     var_list = []
 
-    index_input = pd.read_csv(args.input, skipinitialspace=True, usecols=fields)
+    index_input = pd.read_csv(args.csv_store_path, skipinitialspace=True, usecols=fields)
     success = index_input[index_input['Is Success'] == 1]
     replaced_names_list = success['Replaced Names'].values.tolist()
     keys = []
